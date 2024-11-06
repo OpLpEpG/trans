@@ -1,0 +1,16 @@
+Debug/Indicator.d
+Debug/Indicator.o
+Debug/main.d
+Debug/main.o
+Debug/makedep.mk
+Debug/Makefile
+Debug/packer.d
+Debug/packer.o
+Debug/protected_io.d
+Debug/protected_io.o
+Debug/trans.eep
+Debug/trans.elf
+Debug/trans.hex
+Debug/trans.lss
+Debug/trans.map
+Debug/trans.srec
