@@ -34,15 +34,39 @@ set(TOOLCHAIN_PREFIX                "avr-")
 if(DEFINED TOOLCHAIN_DIRECTORY)
     set(TOOLCHAIN_PREFIX            "${TOOLCHAIN_DIRECTORY}/${TOOLCHAIN_PREFIX}")
 endif()
-# set(FLAGS                           "-fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections")
-set(FLAGS                           "-ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=avr128db48")
-# set(ASM_FLAGS                       "-x assembler-with-cpp")
-set(ASM_FLAGS                       "-Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=avr128db48")
 
-# set(CPP_FLAGS                       "-fno-rtti -fno-exceptions -fno-threadsafe-statics")
+
+# -x c -funsigned-char -funsigned-bitfields -DDEBUG  
+# -I"D:\IDEs\ArmelStudio\7.0\Packs\atmel\AVR-Dx_DFP\1.10.114\include" 
+# -I"c:/AVR/_AVR" -I"../_I"  
+# -Os 
+# -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=avr128db48 
+# -B "D:\IDEs\ArmelStudio\7.0\Packs\atmel\AVR-Dx_DFP\1.10.114\gcc\dev\avr128db48" 
+# -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" 
+# set(FLAGS                           "-fdata-sections -ffunction-sections --specs=nano.specs -Wl,--gc-sections")
+set(C_FLAGS                       "-x c")
+set(FLAGS "-funsigned-char -funsigned-bitfields -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=avr128db48 -B D:/IDEs/ArmelStudio/7.0/Packs/atmel/AVR-Dx_DFP/1.10.114/gcc/dev/avr128db48") 
+# -I D:/IDEs/ArmelStudio/7.0/Packs/atmel/AVR-Dx_DFP/1.10.114/include")
+
+
+# -Wa,-gdwarf2 -x assembler-with-cpp -c -mmcu=avr128db48 
+# -B "D:\IDEs\ArmelStudio\7.0\Packs\atmel\AVR-Dx_DFP\1.10.114\gcc\dev\avr128db48" 
+# -I "D:\IDEs\ArmelStudio\7.0\Packs\atmel\AVR-Dx_DFP\1.10.114\include"  
+# -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -Wa,-g 
+set(ASM_FLAGS "-Wa,-gdwarf2 -x assembler-with-cpp -c -I D:/IDEs/ArmelStudio/7.0/Packs/atmel/AVR-Dx_DFP/1.10.114/include")
+
+
+# -funsigned-char -funsigned-bitfields 
+# -DF_CPU=16000000UL -DCLOCK=CLKHT,TA0,CLKNOOUT -DDIOD=PB,3,INV -DDEBUG  
+# -I"D:\IDEs\ArmelStudio\7.0\Packs\atmel\AVR-Dx_DFP\1.10.114\include" 
+# -I"c:/AVR/_AVR" -I"../_I"  
+# -Os 
+# -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=avr128db48 
+# -B "D:\IDEs\ArmelStudio\7.0\Packs\atmel\AVR-Dx_DFP\1.10.114\gcc\dev\avr128db48" 
+# -c -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" 
 set(CPP_FLAGS                       "")
 
-set(CMAKE_C_COMPILER                ${TOOLCHAIN_PREFIX}gcc${TOOLCHAIN_SUFFIX} ${FLAGS})
+set(CMAKE_C_COMPILER                ${TOOLCHAIN_PREFIX}gcc${TOOLCHAIN_SUFFIX} ${FLAGS} ${C_FLAGS})
 set(CMAKE_ASM_COMPILER              ${CMAKE_C_COMPILER} ${ASM_FLAGS})
 set(CMAKE_CXX_COMPILER              ${TOOLCHAIN_PREFIX}g++${TOOLCHAIN_SUFFIX} ${FLAGS} ${CPP_FLAGS})
 set(CMAKE_OBJCOPY                   ${TOOLCHAIN_PREFIX}objcopy${TOOLCHAIN_SUFFIX})
